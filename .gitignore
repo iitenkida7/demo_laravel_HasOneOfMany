@@ -1,0 +1,7 @@
+.DS_Store
+memo
+scraping_taxisite/result_json
+!laravel/storage/taxisite_json/.gitkeep
+docker/mysql/data/*
+!docker/mysql/data/.gitkeep
+
