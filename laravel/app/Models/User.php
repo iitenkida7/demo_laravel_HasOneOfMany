@@ -40,25 +40,27 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-
-    //https://laravel.com/docs/8.x/eloquent-relationships#has-one-of-many
     public function latestOrder()
     {
+        // max(id) の 条件で １件取得する。
         return $this->hasOne(Order::class)->latestOfMany();
     }
 
     public function oldestOrder()
     {
+        // min(id) の 条件で １件取得する。
         return $this->hasOne(Order::class)->oldestOfMany();
     }
 
     public function largestOrder()
     {
+        // max(price) の 条件で １件取得する。
         return $this->hasOne(Order::class)->ofMany('price', 'max');
     }
 
     public function unpaidLatestOrder()
     {
+        // 未払い(paid_at is null) かつ max(id) の 条件で １件取得する。
         return $this->hasOne(Order::class)->ofMany([
             'id' => 'max',
         ], function ($query) {
